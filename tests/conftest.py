@@ -4,7 +4,8 @@ from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
 
 
-#переписано на использование geckodrivermanager
+#переписано на использование geckodrivermanager без указания пути на компуктере.. до этого убунта сходила с ума
+#и не давала юзать вебдрайвер(
 @pytest.fixture
 def driver():
 
