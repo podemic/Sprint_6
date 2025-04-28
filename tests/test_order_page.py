@@ -1,15 +1,13 @@
-
 import allure
-from conftest import driver
 from page_objects.order_page import OrderPage
 from locators.main_page_locators import MainPageLocators
-from data import *
+from data import TestData
 import pytest
 
 
 class TestOrderPageOrder:
 
-    @allure.title('Проверка позитивного сценария оформелния заказа')
+    @allure.title('Проверка позитивного сценария оформления заказа')
     @allure.description('Тестирование функциональности оформления заказа из двух точек входа')
     @pytest.mark.parametrize('button, test_data', [(MainPageLocators.order_button_in_header, TestData.test_data_user1),
                                                    (MainPageLocators.order_button_in_main, TestData.test_data_user2)])
