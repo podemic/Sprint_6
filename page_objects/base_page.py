@@ -1,15 +1,11 @@
 import allure
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
-
-
 
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
-
 
     @allure.step('Кликнуть на элемент')
     def click_on_element(self, locator):
@@ -20,11 +16,11 @@ class BasePage:
         element = self.driver.find_element(*locator)
         self.driver.execute_script('arguments[0].scrollIntoView();', element)
 
-    @allure.step('Ждем загрузки элемента, использую WebDriverWait')
+    @allure.step('Ждем загрузки элемента, используя WebDriverWait')
     def wait_visibility_of_element(self, locator):
-        return WebDriverWait(self.driver, 6).until(expected_conditions.visibility_of_element_located(locator))
+        return WebDriverWait(self.driver, 6).until(EC.visibility_of_element_located(locator))
 
-    @allure.step('Ввести значение в поле ввода , используя send_keys')
+    @allure.step('Ввести значение в поле ввода, используя send_keys')
     def send_keys_to_input(self, locator, keys):
         self.driver.find_element(*locator).send_keys(keys)
 
@@ -44,6 +40,13 @@ class BasePage:
     def get_page_title(self):
         return self.driver.title
 
+    @allure.step('Прверяем, что URL содержит определенную строку')
+    def wait_url_contains(self, url_part, timeout=15):
+        WebDriverWait(self.driver, timeout).until(
+            EC.url_contains(url_part),
+            message=f"Ожидался URL, содержащий '{url_part}', но текущий URL: {self.driver.current_url}"
+        )
+        return self.driver.current_url.lower()
 
 
 

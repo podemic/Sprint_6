@@ -33,6 +33,7 @@ class MainPageLocators:
         7: (By.XPATH, '//div[@id="accordion__panel-6"]'),
         8: (By.XPATH, '//div[@id="accordion__panel-7"]')
     }
+    #изменения для нового пуллреквеста
 
 
 
